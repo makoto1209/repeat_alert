@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- Bootstrap Icon -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+<title>繰り返しアラート</title>
+</head>
+<style>
+
+main{
+	margin-top: 60px;
+	padding-top: 15px;
+}
+
+#countdown_area{
+	height: 50px;
+	width: 100px;
+	background: #eeeeee;
+	text-align: center;
+	border: solid 2px #888888;
+	border-radius: 5px;
+	margin-left: auto;
+	margin-right: auto;
+}
+#countdown{
+	width: 100px;
+	height: 50px;
+	text-align: center;
+	margin: 5px auto auto auto;
+	
+}
+.timer_set{
+	width: 60px;
+	display: inline-block;
+}
+
+</style>
+<body>
+
+<header>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<a class="navbar-brand" href="#">繰り返しアラート</a>
+		<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	  
+		<div class="collapse navbar-collapse" id="Navber">
+			<!--
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="#">ホーム <span class="sr-only">(現位置)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">リンク</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
+					ドロップダウン
+					</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#">メニュー1</a>
+						<a class="dropdown-item" href="#">メニュー2</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">その他</a>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link disabled">無効</a>
+				</li>
+			</ul>
+			
+			<form class="form-inline my-2 my-lg-0">
+				<input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索...">
+				<button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
+			</form>
+			-->
+		</div><!-- /.navbar-collapse -->
+	</nav>
+</header>
+
+
+
+<main>
+	<div class="container">
+		<div class="row justify-content-center" id="">
+			<div class="col-4">
+				<div id="countdown_area">
+					<h3>
+						<div id="countdown"></div>
+					</h3>
+				</div>
+				
+			</div>
+		</div>
+		<div class="row justify-content-center" style="margin-top: 15px; text-align: center;">
+			<div class="col-4">
+				<div class="form-group timer_set">
+					<select class="form-control" id="minit">
+						<option value="0">0</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
+						<option value="32">32</option>
+						<option value="33">33</option>
+						<option value="34">34</option>
+						<option value="35">35</option>
+						<option value="36">36</option>
+						<option value="37">37</option>
+						<option value="38">38</option>
+						<option value="39">39</option>
+						<option value="40">40</option>
+						<option value="41">41</option>
+						<option value="42">42</option>
+						<option value="43">43</option>
+						<option value="44">44</option>
+						<option value="45">45</option>
+						<option value="46">46</option>
+						<option value="47">47</option>
+						<option value="48">48</option>
+						<option value="49">49</option>
+						<option value="50">50</option>
+						<option value="51">51</option>
+						<option value="52">52</option>
+						<option value="53">53</option>
+						<option value="54">54</option>
+						<option value="55">55</option>
+						<option value="56">56</option>
+						<option value="57">57</option>
+						<option value="58">58</option>
+						<option value="59">59</option>
+					</select>
+				</div>
+				<span class="text-left">min</span>
+				<div class="form-group timer_set">
+					<select class="form-control" id="second">
+						<option value="0">0</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
+						<option value="32">32</option>
+						<option value="33">33</option>
+						<option value="34">34</option>
+						<option value="35">35</option>
+						<option value="36">36</option>
+						<option value="37">37</option>
+						<option value="38">38</option>
+						<option value="39">39</option>
+						<option value="40">40</option>
+						<option value="41">41</option>
+						<option value="42">42</option>
+						<option value="43">43</option>
+						<option value="44">44</option>
+						<option value="45">45</option>
+						<option value="46">46</option>
+						<option value="47">47</option>
+						<option value="48">48</option>
+						<option value="49">49</option>
+						<option value="50">50</option>
+						<option value="51">51</option>
+						<option value="52">52</option>
+						<option value="53">53</option>
+						<option value="54">54</option>
+						<option value="55">55</option>
+						<option value="56">56</option>
+						<option value="57">57</option>
+						<option value="58">58</option>
+						<option value="59">59</option>
+					</select>
+				</div>
+				<span class="text-left">sec</span>
+				<!-- 操作ボタン系 -->
+
+				<!-- 再生/停止ボタン -->
+				<button type="button" class="btn btn-outline-secondary" id="timer_play_button">
+					<!-- ↓の全角スペースは消さないように-->
+					　
+					<!--
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+						<path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+					</svg>
+					-->
+				</button>
+				<!-- リセットボタン -->
+				<button type="button" class="btn btn-outline-secondary" id="timer_reset_button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+						<path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+						<path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+					</svg>
+				</button>
+			</div>
+			
+		  </div>
+	</div>
+
+
+</main>
+
+
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script>
+// タイマーの状態(0=リセット/1=再生/2=停止)
+let timer_status = 0;
+// 画面上で入力した分秒の設定
+let set_min = 0;
+let set_sec = 0;
+// タイマー残り時間(ミリ秒)
+let set_time = 0;
+// タイマー処理用　１秒ごとに現在タイムススタンプを格納
+let comparison_timestamp = 0;
+// 繰り返し処理用変数(setInterval)
+let repeat_interval;
+
+// アイコン
+const START_ICON=	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">' +
+					'<path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>' +
+					'</svg>';
+const STOP_ICON	=	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pause" viewBox="0 0 16 16">' +
+ 					'<path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>' +
+					'</svg>';
+
+$(function(){
+
+	// 再生停止ボタンのアイコンを表示
+	$('#timer_play_button').html(START_ICON);
+	// タイマーの初期値をセット
+	init_timer_set();
+	
+});
+
+
+
+// タイマー設定変更時
+$('#minit, #second').change(function(){
+	
+
+	// console.log(set_time);
+	
+	countdown_update($('#minit').val(), $('#second').val());
+	// $('#countdown').text( $('#minit').val() + ":" + $('#second').val() );
+	
+});
+
+// 再生停止ボタンクリック
+$('#timer_play_button').click(function(){
+	
+
+
+	switch(timer_status){
+		case 0:
+			// リセット状態：再生する
+			let min	= parseInt($('#minit').val());
+			let sec	= parseInt($('#second').val());
+
+			if(min <= 0 && sec <= 0){
+				alert("時間を設定してください");
+				return;
+			}
+			
+
+			// 設定変数を書き換え
+			set_min = min;
+			set_sec = sec;
+
+			// タイマー残り時間を更新
+			set_time = (parseInt(min)*60 + parseInt(sec)) * 1000;
+
+			// 現在のタイムスタンプを取得し、開始時点のタイムスタンプ変数に記録
+			// let now_date = new Date();
+			// start_timestamp = now_date.getTime();
+
+			timer_start();
+
+			$('#timer_play_button').html(STOP_ICON);
+
+			timer_status = 1;
+			break;
+		case 1:
+			// 再生状態：停止する
+
+			timer_stop();
+
+			$('#timer_play_button').html(START_ICON);
+
+			timer_status = 2;
+			break;
+		case 2:
+			// 停止状態：再生する
+			timer_start();
+
+			$('#timer_play_button').html(START_ICON);
+
+			timer_status = 1;
+			break;
+		default:
+			break;
+	}
+
+
+	// countdown_update(min, sec);
+});
+
+$('#timer_reset_button').click(function(){
+	// リセット状態
+	timer_status = 0;
+	// 再生停止ボタンのアイコン変更
+	$('#timer_play_button').html(START_ICON);
+	// タイマー処理停止
+	timer_stop();
+	// カウントダウン
+	countdown_update($('#minit').val(), $('#second').val());
+	
+});
+
+
+// タイマーを開始
+function timer_start(){
+	// 画面更新頻度(ミリ秒)
+	const update_span = 200;
+
+	let start_date = new Date();
+	comparison_timestamp = start_date.getTime();
+	
+	// タイマー表示　定期更新(0.2s)
+	repeat_interval = setInterval(function(){
+		// 経過時間(ミリ秒)　setIntarvalの中で、現在のタイムスタンプから前回の繰り返しで記録したタイムスタンプを引いた値
+		let elapsed_time = 0;
+		// 現在のタイムスタンプを取得
+		let now_date = new Date();
+		let now_timestamp = now_date.getTime();
+
+		// 前回の繰り返し更新から何ミリ秒経ったか計算し、
+		elapsed_time =  now_timestamp - comparison_timestamp;
+
+		// タイマー残り時間から経過時間を引く
+		set_time -= elapsed_time;
+
+		// 比較用タイムスタンプを現在のものに置き換える
+		comparison_timestamp = now_timestamp;
+
+		/*************************************
+		 * カウントダウン表示を更新
+		 * ***********************************/ 
+		// 計算用　カウントダウンの残り時間(ミリ秒を秒に変換)
+		let now_count_sec = Math.floor(set_time / 1000);
+		// 表示用　カウントダウン残り時間(分)
+		let input_min = parseInt(Math.floor(now_count_sec / 60));
+		// 表示用　カウントダウン残り時間(秒)
+		let input_sec = parseInt( now_count_sec - (input_min*60) );
+
+
+		// 残り時間が 0 の場合はタイマーを停止
+		if(input_min <= 0 && input_sec <= 0){
+			// タイマー処理停止
+			timer_stop();
+			// 再生停止ボタンのアイコン変更
+			$('#timer_play_button').html(START_ICON);
+			// カウントダウン表示を0:00に変更
+			countdown_update(0, 0);
+			// タイマー状態をリセットに変更
+			timer_status = 0;
+			
+			alert("お時間です");
+
+		}
+
+		countdown_update(input_min, input_sec);
+
+	}, update_span);
+}
+// タイマーを停止
+function timer_stop(){
+	clearInterval(repeat_interval);
+}
+
+
+
+// ２つのタイムスタンプから経過時間を算出して返す
+// (片方の値からもう片方の値を減算した絶対値を秒に直して返す)
+/*
+function calc_elapsed_time(before_time, after_time){
+	let elapsed_time = Math.abs(before_time - after_time);
+	
+	// 経過時間を秒に直す(小数点以下切り捨て)
+	// elapsed_time = elapsed_time;
+
+	return elapsed_time;
+}
+*/
+
+// 画面上部に表示するタイマー表示(カウントダウン)の更新
+function countdown_update(min, sec){
+	// $('#countdown').text(min + ":" + sec.padStart(2, "0"));
+	$('#countdown').text(min + ":" + String(sec).padStart(2, "0"));
+}
+
+// タイマー設定を読み取り、カウントダウン表示に初期値を設定
+function init_timer_set(){
+	let min	= $('#minit').val();
+	let sec	= $('#second').val();
+
+	if(min.trim() == "" && sec.trim() == ""){
+		// カウントダウン、タイマー設定に初期値を設定
+		$('#minit').val("10");
+		$('#second').val("0");
+		countdown_update(10, 0);
+	}else{
+		countdown_update(min, sec);
+	}
+
+	
+}
+
+
+
+
+</script>
+</body>
+</html>
