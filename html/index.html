@@ -390,6 +390,7 @@ function timer_start(){
 	let start_date = new Date();
 	comparison_timestamp = start_date.getTime();
 	
+
 	// タイマー表示　定期更新(0.2s)
 	repeat_interval = setInterval(function(){
 		// 経過時間(ミリ秒)　setIntarvalの中で、現在のタイムスタンプから前回の繰り返しで記録したタイムスタンプを引いた値
@@ -436,6 +437,7 @@ function timer_start(){
 		countdown_update(input_min, input_sec);
 
 	}, update_span);
+	
 }
 // タイマーを停止
 function timer_stop(){
