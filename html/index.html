@@ -411,16 +411,17 @@ function timer_start(){
 		/*************************************
 		 * カウントダウン表示を更新
 		 * ***********************************/ 
-		// 計算用　カウントダウンの残り時間(ミリ秒を秒に変換)
-		let now_count_sec = Math.floor(set_time / 1000);
+		// 計算用　カウントダウンの残り時間(ミリ秒を秒に変換。小数点切り捨て)
+		let now_count_sec = Math.ceil(set_time / 1000);
 		// 表示用　カウントダウン残り時間(分)
-		let input_min = parseInt(Math.floor(now_count_sec / 60));
+		let input_min = parseInt(Math.floor(now_count_sec/60));
 		// 表示用　カウントダウン残り時間(秒)
-		let input_sec = parseInt( now_count_sec - (input_min*60) );
+		let input_sec = parseInt( now_count_sec-(input_min*60) );
 
-
+		console.log(now_count_sec);
+		
 		// 残り時間が 0 の場合はタイマーを停止
-		if(input_min <= 0 && input_sec <= 0){
+		if(now_count_sec < 0){
 			// タイマー処理停止
 			timer_stop();
 			// 再生停止ボタンのアイコン変更
@@ -432,9 +433,13 @@ function timer_start(){
 			
 			alert("お時間です");
 
+
+			countdown_update(0, 0);
+
+		}else{
+			countdown_update(input_min, input_sec);
 		}
 
-		countdown_update(input_min, input_sec);
 
 	}, update_span);
 	
