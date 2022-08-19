@@ -251,8 +251,24 @@ main{
 					</svg>
 				</button>
 			</div>
-			
-		  </div>
+		</div>
+
+		<!-- アラート音設定 -->
+		<div class="row justify-content-center" id="">
+			<div class="col-4">
+				<div class="form-group">
+					<label for="exampleFormControlSelect1">アラート音設定</label>
+					<select class="form-control" id="sound_select">
+						<option value="アイテム入手音.mp3">アイテム入手音</option>
+						<option value="システム決定音.mp3">システム決定音</option>
+						<option value="ジャングル.mp3">ジャングル</option>
+					</select>
+				</div>
+			</div>
+			<!-- アラート音用 -->
+			<div id="sound_element"></div>
+		</div>
+
 	</div>
 
 
@@ -270,6 +286,8 @@ main{
 <script>
 // タイマーの状態(0=リセット/1=再生/2=停止)
 let timer_status = 0;
+// 繰り返し回数
+let repeat_count = 0;
 // 画面上で入力した分秒の設定
 let set_min = 0;
 let set_sec = 0;
@@ -279,6 +297,7 @@ let set_time = 0;
 let comparison_timestamp = 0;
 // 繰り返し処理用変数(setInterval)
 let repeat_interval;
+
 
 // アイコン
 const START_ICON=	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">' +
@@ -300,15 +319,11 @@ $(function(){
 
 
 // タイマー設定変更時
+/*
 $('#minit, #second').change(function(){
-	
-
-	// console.log(set_time);
-	
 	countdown_update($('#minit').val(), $('#second').val());
-	// $('#countdown').text( $('#minit').val() + ":" + $('#second').val() );
-	
 });
+*/
 
 // 再生停止ボタンクリック
 $('#timer_play_button').click(function(){
@@ -340,7 +355,13 @@ $('#timer_play_button').click(function(){
 
 			timer_start();
 
+			// 画面上の更新
+			// ボタンアイコン変更(pause)
 			$('#timer_play_button').html(STOP_ICON);
+			// 時間設定フォームを変更不可に切り替え
+			$('#minit').prop('disabled', true);
+			$('#second').prop('disabled', true);
+
 
 			timer_status = 1;
 			break;
@@ -350,6 +371,7 @@ $('#timer_play_button').click(function(){
 			timer_stop();
 
 			$('#timer_play_button').html(START_ICON);
+			
 
 			timer_status = 2;
 			break;
@@ -374,6 +396,10 @@ $('#timer_reset_button').click(function(){
 	timer_status = 0;
 	// 再生停止ボタンのアイコン変更
 	$('#timer_play_button').html(START_ICON);
+	// 時間設定フォームを変更可に切り替え
+	$('#minit').prop('disabled', false);
+	$('#second').prop('disabled', false);
+
 	// タイマー処理停止
 	timer_stop();
 	// カウントダウン
@@ -385,7 +411,7 @@ $('#timer_reset_button').click(function(){
 // タイマーを開始
 function timer_start(){
 	// 画面更新頻度(ミリ秒)
-	const update_span = 200;
+	const update_span = 100;
 
 	let start_date = new Date();
 	comparison_timestamp = start_date.getTime();
@@ -412,29 +438,21 @@ function timer_start(){
 		 * カウントダウン表示を更新
 		 * ***********************************/ 
 		// 計算用　カウントダウンの残り時間(ミリ秒を秒に変換。小数点切り捨て)
-		let now_count_sec = Math.ceil(set_time / 1000);
+		let now_count_sec = Math.floor(set_time / 1000);
 		// 表示用　カウントダウン残り時間(分)
 		let input_min = parseInt(Math.floor(now_count_sec/60));
 		// 表示用　カウントダウン残り時間(秒)
 		let input_sec = parseInt( now_count_sec-(input_min*60) );
 
-		console.log(now_count_sec);
+		// console.log(now_count_sec);
 		
-		// 残り時間が 0 の場合はタイマーを停止
+		// 残り時間が 0 の場合は繰り返し処理を実行
 		if(now_count_sec < 0){
-			// タイマー処理停止
-			timer_stop();
-			// 再生停止ボタンのアイコン変更
-			$('#timer_play_button').html(START_ICON);
-			// カウントダウン表示を0:00に変更
-			countdown_update(0, 0);
-			// タイマー状態をリセットに変更
-			timer_status = 0;
 			
-			alert("お時間です");
-
-
-			countdown_update(0, 0);
+			// タイマー処理繰り返し
+			timer_repeat();
+			// アラートを鳴らす
+			sound_awake();
 
 		}else{
 			countdown_update(input_min, input_sec);
@@ -449,7 +467,32 @@ function timer_stop(){
 	clearInterval(repeat_interval);
 }
 
+// タイマーを繰り返す
+function timer_repeat(){
+	repeat_count++;
 
+	
+	
+	// タイマー残り時間を更新
+	set_time = (parseInt(set_min)*60 + parseInt(set_sec)) * 1000;
+	// タイマー用変数を再設定(設定時間上乗せ)
+	// comparison_timestamp += (parseInt(set_min)*60 + parseInt(set_sec)) * 1000;
+
+	// タイマー用変数を上限に戻す
+	let start_date = new Date();
+	comparison_timestamp = start_date.getTime();
+	// カウントダウン表示を更新
+	// countdown_update(set_min, set_sec);
+}
+
+// アラート音を鳴らす
+function sound_awake(){
+	let sound_file_path = '../sound/' + $('#sound_select').val();
+	
+	let audio = new Audio(sound_file_path);
+	audio.play();
+
+}
 
 // ２つのタイムスタンプから経過時間を算出して返す
 // (片方の値からもう片方の値を減算した絶対値を秒に直して返す)
